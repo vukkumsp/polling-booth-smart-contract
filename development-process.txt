@@ -1,4 +1,28 @@
-Step 1: Create ./contracts folder
-Step 2: Create PollingBoothContract.sol and added code
-Step 3: Install dev dependencies with below command:
-    `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`
+Step 1: Initialize an npm project
+        `npm init`
+Step 2: Install hardhat
+        `npm install --save-dev hardhat`
+
+From here onwards, steps are taken from Hardhat Quick start guide (https://hardhat.org/hardhat-runner/docs/getting-started#quick-start)
+
+Step 1: Initialize current folder as a hardhat project
+        `npx hardhat init`
+        This initializes and generates folders and some sample files
+Step 2: Inside ./contracts folder
+        Create PollingBoothContract.sol and add code
+Step 3: Remove the sample files if not required.
+Step 4: Compile smart contracts using 
+        `npx hardhat compile`
+Step 5: Run tests using
+        `npx hardhat test`
+Step 6: To Deploy contract on in-memory hardhat network
+        `npx hardhat ignition deploy ./ignition/modules/Lock.ts`
+Step 7: To start a Hardhat Node on localhost
+        `npx hardhat node`
+Step 8: Once hardhat node started on localhost, deploy contract on to it using
+        `npx hardhat ignition deploy ./ignition/modules/Lock.ts --network localhost`
+
+Writing Tests:
+
+Step 1: Using the generated test js files, create your own.
+

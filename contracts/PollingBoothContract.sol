@@ -23,7 +23,15 @@ contract PollingBoothContract {
         mapping(address => Voter) voters;
     }
 
-    mapping(uint256 => VotingEvent) public votingEvents;
+    struct VotingEventSummary {
+        string topic;
+        Option[] options;
+        bool votingActive;
+        bool exists;
+    }
+
+    //This (mapping) doesn't get a getter method so we need a separate method to get these details
+    mapping(uint256 => VotingEvent) public votingEvents; 
     uint256 public eventCount;
 
     address public owner;
@@ -48,6 +56,10 @@ contract PollingBoothContract {
     }
 
     /********************************************/
+
+    function isOwner() external view returns (bool) {
+        return this.owner()==msg.sender;
+    }
 
     function startVotingEvent(string memory _topicName, string[] memory _optionNames) external onlyOwner {
         VotingEvent storage newEvent = votingEvents[eventCount];
@@ -99,5 +111,18 @@ contract PollingBoothContract {
 
     function getOptions(uint256 eventId) external view validEvent(eventId) returns (Option[] memory) {
         return votingEvents[eventId].options;
+    }
+
+    function votingEventsSummary() external view returns(VotingEventSummary[] memory){
+        VotingEventSummary[] memory summaries = new VotingEventSummary[](eventCount);
+
+        for(uint i=0;i<eventCount;++i){
+            VotingEvent storage voteEvent = votingEvents[i];
+            summaries[i].topic = voteEvent.topic;
+            summaries[i].options = voteEvent.options;
+            summaries[i].votingActive = voteEvent.votingActive;
+            summaries[i].exists = voteEvent.exists;
+        }
+        return summaries;
     }
 }

@@ -4,6 +4,7 @@ const {
 } = require("@nomicfoundation/hardhat-toolbox/network-helpers");
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
+const { string } = require("hardhat/internal/core/params/argumentTypes");
 
 describe("PollingBoothContract", function () {
     async function deployPollingBoothContractFixture() {
@@ -34,5 +35,21 @@ describe("PollingBoothContract", function () {
 
             expect(await pollingBooth.eventCount()).to.equal(0);
         });
-      });
+    });
+
+    describe("Operations", function () {
+        it("Should only allow vote event creation by owner", async function () {
+            const { pollingBooth, owner, otherAccount } = await loadFixture(deployPollingBoothContractFixture);
+      
+            let alienMovies = ["Alien", "Aliens", "Alien3", "Alien:Resurrection", "Prometheus", "Covenant", "Romulus"];
+            await pollingBooth.startVotingEvent("Best movie in Alien franchise", alienMovies);
+            expect(await pollingBooth.eventCount()).to.equal(1);
+            expect(await pollingBooth.votingEvents().length).to.equal(1);
+            // expect(await pollingBooth.votingEventsSummary()).to.notEqual(null);
+            // expect(await pollingBooth.votingEventsSummary()[0].topic).to.equal("Best movie in Alien franchise");
+            // expect(await pollingBooth.votingEvents(0).topic).to.equal("Best movie in Alien franchise");
+        });
+    });
+
+
 });

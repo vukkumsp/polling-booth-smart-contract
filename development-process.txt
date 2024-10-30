@@ -11,16 +11,17 @@ Step 1: Initialize current folder as a hardhat project
 Step 2: Inside ./contracts folder
         Create PollingBoothContract.sol and add code
 Step 3: Remove the sample files if not required.
+
 Step 4: Compile smart contracts using 
         `npx hardhat compile`
 Step 5: Run tests using
         `npx hardhat test`
 Step 6: To Deploy contract on in-memory hardhat network
-        `npx hardhat ignition deploy ./ignition/modules/Lock.ts`
+        `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js`
 Step 7: To start a Hardhat Node on localhost
         `npx hardhat node`
 Step 8: Once hardhat node started on localhost, deploy contract on to it using
-        `npx hardhat ignition deploy ./ignition/modules/Lock.ts --network localhost`
+        `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js --network localhost`
 
 Writing Tests:
 

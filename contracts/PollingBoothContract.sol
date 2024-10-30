@@ -125,4 +125,13 @@ contract PollingBoothContract {
         }
         return summaries;
     }
+
+    function getEventSummary(uint256 eventId) external view validEvent(eventId) returns (VotingEventSummary memory){
+        return VotingEventSummary({
+            topic: votingEvents[eventId].topic,
+            options: votingEvents[eventId].options,
+            votingActive: votingEvents[eventId].votingActive,
+            exists: votingEvents[eventId].exists
+        });
+    }
 }

@@ -20,7 +20,7 @@ Step 6: To Deploy contract on in-memory hardhat network
         `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js`
 Step 7: To start a Hardhat Node on localhost
         `npx hardhat node`
-Step 8: Once hardhat node started on localhost, deploy contract on to it using
+Step 8: Once hardhat node started on localhost, compile (if any changes done) and deploy contract on to it using
         `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js --network localhost`
 
 Writing Tests:

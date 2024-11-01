@@ -1,0 +1,25 @@
+name: NPM Compile
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  npm-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Started NPM Build Job"
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Checking NodeJs & NPM Versions
+        run: |
+          echo "Node Version check"
+          node -v
+          echo "NPM Version check"
+          npm -v
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Build for prod
+        run: |
+          npx hardhat compile

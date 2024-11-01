@@ -1,5 +1,5 @@
 # Polling Booth Smart Contract
-
+[![NPM Compile](https://github.com/vukkumsp/polling-booth-smart-contract/actions/workflows/ghpages-push.yml/badge.svg)](https://github.com/vukkumsp/polling-booth-smart-contract/actions/workflows/ghpages-push.yml)
 
 ## Dependencies:
 

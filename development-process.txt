@@ -23,6 +23,41 @@ Step 7: To start a Hardhat Node on localhost
 Step 8: Once hardhat node started on localhost, compile (if any changes done) and deploy contract on to it using
         `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js --network localhost`
 
+Deploying to testnet (not localhost)
+Assuming we already compiled the smart contract.
+Step 1: In the metamask, switch to testnet (Sepolia is currently active testnet)
+        And, create 2 accounts. These give us 2 PRIVATE_KEYS
+Step 2: Create an account in app.infura.io, this provides us with API_KEY
+Step 3: Get some ETH in 2 accounts we created to use for testing.
+        you can use 
+                https://sepolia-faucet.pk910.de/
+                https://sepoliafaucet.com
+                https://cloud.google.com/application/web3/faucet/ethereum/sepolia
+Step 4: Install dotnet dependency if not already done.
+        `npm install dotenv`
+        And, add below line in hardhat.config.js starting to fetch env variables
+        `require("dotenv").config();`
+Step 4: store PRIVATE_KEYS and API_KEY in .env file and make sure to exclude this file from git commits
+        by using it in .gitignore file
+Step 5: In hardhat.config.js file, add new network as below
+        "
+                module.exports = {
+                        solidity: '0.8.27',
+                        networks: {
+                                localhost: {
+                                        url: 'http://127.0.0.1:8545', // Local network URL
+                                },
+                                sepolia: {
+                                        url: 'https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID;,
+                                        accounts: ['YOUR_PRIVATE_KEY_1','YOUR_PRIVATE_KEY_2'],
+                                },
+                        },
+                };
+        "
+Step 6: Now, we execute the deployment cmd as follow:
+        `npx hardhat ignition deploy ./ignition/modules/PollingBoothContract.js --network sepolia`
+Step 7: Verify deployments using https://sepolia.etherscan.io
+
 Writing Tests:
 
 Step 1: Using the generated test js files, create your own.
